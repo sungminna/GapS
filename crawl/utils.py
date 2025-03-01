@@ -4,7 +4,7 @@ import re
 
 
 
-def html2md(html_content):
+async def html2md(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
 
     for script in soup(["script", "style", "svg", "noscript", "iframe"]):
