@@ -45,7 +45,7 @@ async def scrape_aws_pricing():
         half_height = total_height // 2
         await page.evaluate(f"window.scrollTo(0, {half_height})")
         await page.wait_for_timeout(1000)
-        await page.screenshot(path="aws_pricing_screenshot_stability.png", full_page=True)
+        # await page.screenshot(path="aws_pricing_screenshot_stability.png", full_page=True)
         
         html_content = await page.content()
         markdown_content = await html2md(html_content)
@@ -53,13 +53,12 @@ async def scrape_aws_pricing():
         h2_name="Stability AI"
         pattern = rf"(?<=##  {h2_name}\n)(.*?)(?=##  |\n#  |\Z)"
         match = re.search(pattern, markdown_content, re.DOTALL)
-        print(match)
         res = match.group(0).strip() if match else None
 
         markdown_content = str(res)
         
         # Markdown 파일로 저장
-        with open("aws_pricing_data_stability.md", "w", encoding="utf-8") as md_file:
+        with open("dump/aws_pricing_data_stability.md", "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
 
 
@@ -70,7 +69,7 @@ async def scrape_aws_pricing():
         half_height = total_height // 2
         await page.evaluate(f"window.scrollTo(0, {half_height})")
         await page.wait_for_timeout(1000)
-        await page.screenshot(path="aws_pricing_screenshot_titan.png", full_page=True)
+        # await page.screenshot(path="aws_pricing_screenshot_titan.png", full_page=True)
         await page.wait_for_timeout(1000)
         
 
@@ -80,13 +79,12 @@ async def scrape_aws_pricing():
         h2_name="Amazon Titan"
         pattern = rf"(?<=##  {h2_name}\n)(.*?)(?=##  |\n# |\Z)"
         match = re.search(pattern, markdown_content, re.DOTALL)
-        print(match)
         res = match.group(0).strip() if match else None
 
         markdown_content = str(res)
         
         # Markdown 파일로 저장
-        with open("aws_pricing_data_titan.md", "w", encoding="utf-8") as md_file:
+        with open("dump/aws_pricing_data_titan.md", "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
         
         # 브라우저 닫기

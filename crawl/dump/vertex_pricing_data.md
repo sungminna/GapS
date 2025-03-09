@@ -23,14 +23,16 @@ Docs  지원
   * 日本語
   * 한국어
 
+콘솔 
+
 로그인 
 
-  * Generative AI on Vertex AI 
+  * Generative AI 
 
 문의하기 무료로 시작하기
 
   * 홈 
-  * Generative AI on Vertex AI 
+  * Generative AI 
   * Documentation 
 
 의견 보내기 

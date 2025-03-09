@@ -27,30 +27,31 @@ async def scrape_azure_pricing():
         page = await context.new_page()
 
         await page.goto("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/", timeout=60000)
-        await page.wait_for_load_state("networkidle")
-        await page.wait_for_timeout(1000)
+        # buggy
+        # await page.wait_for_load_state("networkidle")
+        await page.wait_for_timeout(3000)
 
 
         # east-us-2 region 선택
         await page.select_option('.region-selector', 'us-east-2')
         await page.wait_for_timeout(1000)
-        await page.screenshot(path="azure_pricing_screenshot_east.png", full_page=True)
+        # await page.screenshot(path="azure_pricing_screenshot_east.png", full_page=True)
 
         html_content = await page.content()
-        markdown_content = html2md(html_content)
+        markdown_content = await html2md(html_content)
         # Markdown 파일로 저장
-        with open("azure_pricing_data_east.md", "w", encoding="utf-8") as md_file:
+        with open("dump/azure_pricing_data_east.md", "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
 
         # north cenrtral region 선택
         await page.select_option('.region-selector', 'us-north-central')
         await page.wait_for_timeout(1000)
-        await page.screenshot(path="azure_pricing_screenshot_north.png", full_page=True)
+        # await page.screenshot(path="azure_pricing_screenshot_north.png", full_page=True)
 
         html_content = await page.content()
-        markdown_content = html2md(html_content)
+        markdown_content = await html2md(html_content)
         # Markdown 파일로 저장
-        with open("azure_pricing_data_north.md", "w", encoding="utf-8") as md_file:
+        with open("dump/azure_pricing_data_north.md", "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
         
         # 브라우저 닫기

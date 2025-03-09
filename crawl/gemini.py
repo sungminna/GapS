@@ -30,13 +30,13 @@ async def scrape_gemini_pricing():
         await page.wait_for_load_state("networkidle")
         await page.wait_for_timeout(1000)
 
-        await page.screenshot(path="gemini_pricing_screenshot.png", full_page=True)
+        # await page.screenshot(path="gemini_pricing_screenshot.png", full_page=True)
 
         html_content = await page.content()
-        markdown_content = html2md(html_content)
+        markdown_content = await html2md(html_content)
         
         # Markdown 파일로 저장
-        with open("gemini_pricing_data.md", "w", encoding="utf-8") as md_file:
+        with open("dump/gemini_pricing_data.md", "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
         
         # 브라우저 닫기

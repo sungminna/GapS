@@ -2,6 +2,8 @@ import asyncio
 from playwright.async_api import async_playwright
 from datetime import datetime
 from utils import html2md
+import json
+
 
 async def scrape_openai_pricing():
     async with async_playwright() as p:
@@ -23,17 +25,28 @@ async def scrape_openai_pricing():
             }
         )
         
+        
         # Open AI Cloudflare cookie 설정 -> Chrome Devtools에서 수동으로 복붙붙
+        cf_clearance=""
+        with open("cf_clearance.txt", "r", encoding="utf-8") as cf:
+            cf_clearance = cf.read()
+
+        print(cf_clearance)
         await context.add_cookies([
             {
                 "name": "cf_clearance",
-                "value": "IRlcf70hsIOVnajrd4CpysLvOCfYKM2nJYZmkbh8UqQ-1740667753-1.2.1.1-RA3tyg9PPDti9rdSGyqCzB_4WUIwxys72ahUQck01dgXe78_dPJWGJf3hmNaJxM92HYVdGZVui.pvJuQwocGt6EEB.AQ4dwi_jCiQA2bT0p.ZAQS4pt9EAYbjjA0N2.J9Iy0tcR4Q1ylASu3GJ.6AQFIj5ReoTyMIUp5hA5JfD1MlAMeyZT4VfYR7rKtwXCictp1ZreABA_oS9t0k8yXWfWrBi0GzmTrXHFvmsVD2w6tNt85iGahB_MdKsMANCftdbbdeugSxP_2i.t35xQloGvXLBDJYhl448VEhU4biQg",  # 실제 cf_clearance 값으로 교체
+                "value": cf_clearance,  # 실제 cf_clearance 값으로 교체
                 "domain": ".openai.com", 
                 "path": "/",
                 "secure": True,
                 "httpOnly": True
             }
         ])
+
+        with open('cookies.json', 'r') as f:
+            cookies = json.load(f)
+        await context.add_cookies(cookies)
+
 
         # 새 페이지 생성
         page = await context.new_page()
@@ -52,20 +65,39 @@ async def scrape_openai_pricing():
             except Exception as e:
                 print(f"버튼 클릭 중 오류 발생: {e}")
 
-        await page.screenshot(path="openai_pricing_screenshot.png", full_page=True)
+        # await page.screenshot(path="openai_pricing_screenshot.png", full_page=True)
 
         html_content = await page.content()
-        markdown_content = html2md(html_content)
+        markdown_content = await html2md(html_content)
         
         # Markdown 파일로 저장
-        with open("openai_pricing_data.md", "w", encoding="utf-8") as md_file:
+        with open("dump/openai_pricing_data.md", "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
         
+        cookies_list = await context.cookies()
+        for cookie in cookies_list:
+            if cookie['name'] == 'cf_clearance':
+                cf_clearance = cookie['value']
+                break
+
+        if cf_clearance:
+            print("cf_clearance value:", cf_clearance)
+            with open("cf_clearance.txt", "w", encoding="utf-8") as cf:
+                cf.write(cf_clearance)
+        else:
+            print("cf_clearance cookie not found")
+
+
+        cookies = await context.cookies()
+        with open('cookies.json', 'w') as f:
+            json.dump(cookies, f)
+
         # 브라우저 닫기
         await browser.close()
         
         print(f"스크래핑 완료! 데이터가 'openai_pricing_data.json'과 CSV 파일들로 저장되었습니다.")
-        return 0
+
+        return cf_clearance
 
 if __name__ == "__main__":
     asyncio.run(scrape_openai_pricing())

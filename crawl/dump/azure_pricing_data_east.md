@@ -61,15 +61,15 @@ Output: $66 | N/A
 o1 2024-12-17 Regional |  Input: $16.50  
 Cached Input: $8.25  
 Output: $66 | N/A  
-o1 preview 2024-09-12 Global |  Input: N/A  
-Cached Input: N/A  
-Output: N/A | N/A  
+o1 preview 2024-09-12 Global |  Input: $15  
+Cached Input: $7.50  
+Output: $60 | N/A  
 o1 preview 2024-09-12 US/EU – Data Zones |  Input: $16.50  
 Cached Input: $8.25  
 Output: $66 | N/A  
-o1 preview 2024-09-12 Regional |  Input: N/A  
-Cached Input: N/A  
-Output: N/A | N/A  
+o1 preview 2024-09-12 Regional |  Input: $16.50  
+Cached Input: $8.25  
+Output: $66 | N/A  
   
 Plan with the Pricing Calculator
 
@@ -92,15 +92,15 @@ Output: $2.42
 o3 mini 2025-01-31 Regional |  Input: $1.21  
 Cached Input: $0.605  
 Output: $4.84 | N/A  
-o1-mini 2024-09-12 Global |  Input: N/A  
-Cached Input: N/A  
-Output: N/A | N/A  
-o1-mini 2024-09-12 US/EU – Data Zones |  Input: $3.30  
-Cached Input: $1.65  
-Output: $13.20 | N/A  
-o1-mini 2024-09-12 Regional |  Input: N/A  
-Cached Input: N/A  
-Output: N/A | N/A  
+o1-mini 2024-09-12 Global |  Input: $1.10  
+Cached Input: $0.55  
+Output: $4.40 | N/A  
+o1-mini 2024-09-12 US/EU – Data Zones |  Input: $1.21  
+Cached Input: $0.605  
+Output: $4.84 | N/A  
+o1-mini 2024-09-12 Regional |  Input: $1.21  
+Cached Input: $0.605  
+Output: $4.84 | N/A  
   
 Plan with the Pricing Calculator
 
@@ -337,20 +337,20 @@ Cached Input: $1.25/1M tokens
 Output: $10/1M tokens  
 Training: use regional  
 Hosting: $1.7/hour   
-GPT-4o-mini |  Regional |  Input: $0.165/1M tokens  
-Cached Input: $0.083/1M tokens  
-Output: $0.66/1M tokens  
-Training: $3.3/1M tokens  
-Hosting: $1.7/hour   
-Global |  Input: $0.15/1M tokens  
-Cached Input: $0.075/1M tokens  
-Output: $0.60/1M tokens  
+GPT-4o-mini |  Regional |  Input: N/A/1M tokens  
+Cached Input: N/A/1M tokens  
+Output: N/A/1M tokens  
+Training: N/A/1M tokens  
+Hosting: N/A/hour   
+Global |  Input: N/A/1M tokens  
+Cached Input: N/A/1M tokens  
+Output: N/A/1M tokens  
 Training: use regional  
-Hosting: $1.7/hour   
-GPT-4-0613 (8K) |  Regional |  Input: $30/1M tokens  
-Output: $60/1M tokens  
-Training: $80/1M tokens  
-Hosting: $5/hour   
+Hosting: N/A/hour   
+GPT-4-0613 (8K) |  Regional |  Input: N/A/1M tokens  
+Output: N/A/1M tokens  
+Training: N/A/1M tokens  
+Hosting: N/A/hour   
 GPT-3.5-Turbo (16K) |  Regional |  Input: $0.5/1M tokens  
 Output: $1.5/1M tokens  
 Training: $8/1M tokens  
@@ -390,12 +390,12 @@ Inference cost (input and output) varies based on the GPT model used with each A
 Models | Quality | Resolution | Price (per 100 images)  
 ---|---|---|---  
 Dall-E-3 | Standard | 1024 * 1024 | $4  
-| Standard | 1024 * 1792,   
+Standard | 1024 * 1792,   
 1792 * 1024 | $8  
 Dall-E-3 | HD | 1024 * 1024 | $8  
-| HD | 1024 * 1792,   
+HD | 1024 * 1792,   
 1792 * 1024 | $12  
-Dall-E-2 | Standard | 1024 * 1024 | N/A  
+Dall-E-2 | Standard | 1024 * 1024 | $2  
   
 ## Embedding models
 
@@ -410,8 +410,8 @@ text-embedding-3-small | $0.00002
 Models | Price  
 ---|---  
 Whisper | $0.36/hour  
-TTS (Text to Speech) | $15/1M characters  
-TTS HD | $30/1M characters  
+TTS (Text to Speech) | N/A/1M characters  
+TTS HD | N/A/1M characters  
   
 ## Legacy Language Models
 
@@ -497,3 +497,9 @@ Chat with Sales
 Can we help you?
 
 Chat Now  No thanks 
+
+Microsoft is conducting an online survey to understand your opinions about the Microsoft Azure website. If you choose to participate, the online survey will be presented to you when you leave the website.  
+  
+Would you like to participate?
+
+Privacy Statement

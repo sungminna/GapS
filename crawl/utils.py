@@ -2,6 +2,9 @@ from bs4 import BeautifulSoup
 import html2text
 import re
 
+import difflib
+import shutil
+import os
 
 
 async def html2md(html_content):
@@ -50,3 +53,27 @@ async def html2md(html_content):
     markdown_content = re.sub(r'\n{3,}', '\n\n', markdown_content)
 
     return markdown_content
+
+
+async def find_diff(old_file, new_file):
+    with open(old_file, 'r') as f:
+        old_lines = f.readlines()
+    with open(new_file, 'r') as f:
+        new_lines = f.readlines()
+
+    diff = difflib.unified_diff(old_lines, new_lines, fromfile=old_file, tofile=new_file)
+    diff_text = ''.join(diff)
+    return diff_text
+
+async def move_files():
+    src = "dump"
+    dest = "legacy"
+    try:
+        if os.path.exists(dest):
+            shutil.rmtree(dest)
+
+        shutil.copytree(src, dest)
+        print("move complete")
+    except Exception as e:
+        print(f"복사 중 오류가 발생했습니다: {e}")
+

@@ -22,6 +22,7 @@ HomeGuidesAPI ReferenceChangelogSystem StatusFAQDiscussions
   * Rate Limits and Usage Tiers
   * Structured Outputs Guide
   * Prompt Guide
+  * Sonar Cookbook
   * Perplexity Crawlers
 
 Model| Input Tokens (Per Million Tokens)| Reasoning Tokens (Per Million Tokens)| Output Tokens (Per Million Tokens)| Price per 1000 searches  
